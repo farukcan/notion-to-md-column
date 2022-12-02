@@ -1,6 +1,6 @@
 {
   "name": "notion-to-md-column",
-  "version": "2.5.7",
+  "version": "2.5.8",
   "engines": {
     "node": ">=12"
   },
