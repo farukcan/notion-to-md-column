@@ -114,7 +114,6 @@ export class NotionToMarkdown {
       if (
         "has_children" in block &&
         block.has_children &&
-        block.type !== "toggle" &&
         block.type !== "callout"
       ) {
         let child_blocks = await getBlockChildren(
@@ -282,26 +281,7 @@ export class NotionToMarkdown {
         const toggle_summary = block.toggle.rich_text[0]?.plain_text;
 
         // empty toggle
-        if (!has_children) {
-          return md.toggle(toggle_summary);
-        }
-
-        const toggle_children_object = await getBlockChildren(
-          this.notionClient,
-          id,
-          100
-        );
-
-        // parse children blocks to md object
-        const toggle_children = await this.blocksToMarkdown(
-          toggle_children_object
-        );
-
-        // convert children md object to md string
-        const toggle_children_md_string =
-          this.toMarkdownString(toggle_children);
-
-        return md.toggle(toggle_summary, toggle_children_md_string);
+        return toggle_summary;
       }
       // Rest of the types
       // "paragraph"
