@@ -53,7 +53,7 @@ export type Annotations = {
 };
 
 export type Text = {
-  type: "text";
+  type: string;
   text: {
     content: string;
     link: {

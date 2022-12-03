@@ -176,7 +176,7 @@ export class NotionToMarkdown {
       }
 
       case "equation": {
-        return md.codeBlock(block.equation.expression);
+        return md.codeBlock(block.equation.expression,"math");
       }
 
       case "video":
@@ -318,6 +318,10 @@ export class NotionToMarkdown {
 
           if (content["href"])
             plain_text = md.link(plain_text, content["href"]);
+
+          if(content.type === "equation") {
+            plain_text = `<code language="math">${plain_text}</code>`;
+          }
 
           parsedData += plain_text;
         });
