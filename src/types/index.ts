@@ -63,6 +63,13 @@ export type Text = {
   annotations: Annotations;
   plain_text: string;
   href: string | null;
+  mention: {
+    type: string,
+    date: {
+      start: string,
+      end: string
+    }
+  } | null;
 };
 
 export type CalloutIcon =

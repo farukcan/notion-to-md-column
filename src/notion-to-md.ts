@@ -323,6 +323,16 @@ export class NotionToMarkdown {
             plain_text = `<code language="math">${plain_text}</code>`;
           }
 
+          if(content.type === "mention") {
+            if(content.mention && content.mention.type === "date") {
+              if(content.mention.date.end) {
+                plain_text = `<time datetime="${content.mention.date.start}" end="${content.mention.date.end}">${plain_text}</time>`;
+              }else{
+                plain_text = `<time datetime="${content.mention.date.start}">${plain_text}</time>`;
+              }
+            }
+          }
+
           parsedData += plain_text;
         });
       }
