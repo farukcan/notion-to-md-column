@@ -176,7 +176,7 @@ export class NotionToMarkdown {
       }
 
       case "equation": {
-        return md.codeBlock(block.equation.expression,"math");
+        return `<code language="math">${block.equation.expression}</code>`;
       }
 
       case "video":
