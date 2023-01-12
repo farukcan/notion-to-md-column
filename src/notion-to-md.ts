@@ -113,8 +113,7 @@ export class NotionToMarkdown {
       let block = blocks[i];
       if (
         "has_children" in block &&
-        block.has_children &&
-        block.type !== "callout"
+        block.has_children
       ) {
         let child_blocks = await getBlockChildren(
           this.notionClient,
@@ -371,30 +370,7 @@ export class NotionToMarkdown {
 
       case "callout":
         {
-          const { id, has_children } = block;
-          let callout_string = "";
-
-          if (!has_children) {
-            return md.callout(parsedData, block[type].icon);
-          }
-
-          const callout_children_object = await getBlockChildren(
-            this.notionClient,
-            id,
-            100
-          );
-
-          // // parse children blocks to md object
-          const callout_children = await this.blocksToMarkdown(
-            callout_children_object
-          );
-
-          callout_string += `${parsedData}\n`;
-          callout_children.map((child) => {
-            callout_string += `${child.parent}\n\n`;
-          });
-
-          parsedData = md.callout(callout_string.trim(), block[type].icon);
+          parsedData = JSON.stringify({ content: parsedData, icon: block[type].icon });
         }
         break;
 
